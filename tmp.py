@@ -1,4 +1,4 @@
-from buyer import Buyer
+from producer import Buyer
 
 by_1 = Buyer('Buyer 1')
 
