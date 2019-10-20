@@ -10,4 +10,14 @@ class Supplier(Agent):
 
     def __init__(self, name):
 
-        pass
+        super().__init__(name)
+
+        #
+        # Initialize the essence of the Supplier
+        #
+        essence_keys_lies = ['degree_of_lying']
+        essence_init_lies = 0.0
+
+        essence_ = Essence('Supplier Disposition', essence_keys_lies)
+        essence_.set_values(essence_init_lies)
+        self.set_scaffold(essence_)
