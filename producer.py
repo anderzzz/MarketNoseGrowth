@@ -1,18 +1,11 @@
 '''Producer Agent Definitions
 
 '''
-import numpy as np
-
 from fjarrsyn import Agent
-from fjarrsyn import Essence, Resource
+from fjarrsyn import Essence, Resource, Belief
+from fjarrsyn import Buzz, Direction
 
-def _rnd_vector(n_dim, magnitude=1.0):
-    '''Generate random vector of specific dimension and magnitude'''
-
-    vals = [np.random.ranf() - 0.5 for k in range(n_dim)]
-    radial_adjust = np.sqrt(np.dot(vals, vals)) / magnitude
-
-    return np.divide(vals, radial_adjust)
+from funcs import _rnd_vector
 
 class Producer(Agent):
 
@@ -44,8 +37,18 @@ class Producer(Agent):
         #
         resource_ = Resource('Stock', ['cash on hand', 'productive_units'])
         resource_.set_values(cash_start, [])
+        self.set_scaffold(resource_)
 
         #
         # Initialize the beliefs of the Buyer
         #
         belief_ = None
+
+        #
+        # Initialize messages used by Producer
+        #
+        buzz_unit_offer = Buzz('Unit Offer', ('unit_feature_vec', 'price'))
+        direction_buy = Direction('Buy Unit on Offer', ('buy_decision',))
+        direction_counter_offer = Direction('Issue Counter Offer', ('price_counter',))
+
+        self.set_messages(buzz_unit_offer, direction_buy, direction_counter_offer)
