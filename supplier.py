@@ -1,6 +1,8 @@
 '''Supplier Agent Definitions
 
 '''
+import numpy as np
+
 from fjarrsyn import Agent
 from fjarrsyn import Essence, Resource
 
@@ -8,7 +10,8 @@ from funcs import _rnd_vector
 
 class Supplier(Agent):
 
-    def __init__(self, name, cash_start=0.0, feature_ndims=5, n_unit_init=10):
+    def __init__(self, name, cash_start=0.0, feature_ndims=5, n_unit_init=10,
+                 magnitude_generator=np.random.pareto, magnitude_generator_kwargs={'a':2.0}):
 
         super().__init__(name)
 
@@ -28,7 +31,7 @@ class Supplier(Agent):
         resource_ = Resource('Stock', ['cash on hand', 'sales_units'])
         spawned_units = []
         for k_unit in range(n_unit_init):
-            mag = #INSERT RAND FUNC
+            mag = magnitude_generator(**magnitude_generator_kwargs)
             spawned_units.append(_rnd_vector(feature_ndims, mag))
 
         resource_.set_values(cash_start, spawned_units)
