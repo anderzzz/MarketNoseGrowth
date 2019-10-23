@@ -10,3 +10,7 @@ def _rnd_vector(n_dim, magnitude=1.0):
     radial_adjust = np.sqrt(np.dot(vals, vals)) / magnitude
 
     return np.divide(vals, radial_adjust)
+
+def law_unit_to_cash():
+    '''Compute revenue generated in one time-unit from a given producer unit'''
+

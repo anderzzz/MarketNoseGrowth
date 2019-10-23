@@ -22,7 +22,7 @@ def engine(agent_ms):
         producer_node.agent_content.enact('Evaluate Unit Offer')
         supplier_node.agent_content.enact('Accept Transaction Or Update Offer')
         producer_node.agent_content.enact('Transact Resources')
-        
+
     for agent_node in agent_ms:
         agent_ms.engage_all_verbs(agent_node.agent_content)
 
